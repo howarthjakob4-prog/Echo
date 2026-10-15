@@ -1,0 +1,4 @@
+'use strict';
+function validateChat(p){if(!p||typeof p!=='object'||typeof p.model!=='string'||!p.model.trim()||p.model.length>200||!['Roblox Studio','Unreal Engine 5'].includes(p.engine)||!['Programming','Game design','Studio planning','Trailers'].includes(p.mode)||typeof p.brief!=='string'||p.brief.length>20000||!Array.isArray(p.messages)||p.messages.length<1||p.messages.length>20||p.messages.some(m=>!m||!['user','assistant'].includes(m.role)||typeof m.content!=='string'||m.content.length>20000)||JSON.stringify(p).length>120000)throw new Error('The conversation is too long or has invalid content. Export it and start a new conversation.');return p;}
+function modelNames(v){if(!Array.isArray(v?.models))throw new Error('Invalid model list.');return v.models.filter(m=>typeof m?.name==='string'&&m.name.length<200&&(!m.size||m.size>0)&&!m.remote_host&&!m.remote_model&&!/[-:]cloud$/i.test(m.name)).map(m=>m.name);}
+module.exports={validateChat,modelNames};

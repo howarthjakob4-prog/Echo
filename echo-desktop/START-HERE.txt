@@ -1,0 +1,43 @@
+ECHO 0.1 — PROJECT NOVA STUDIO
+Windows desktop edition, x64
+
+OPEN ECHO
+1. Right-click the downloaded ZIP and choose Extract All.
+2. Keep the entire extracted Echo folder together. Do not move only Echo.exe.
+3. Open Echo.exe inside that folder.
+4. In Echo, click Create desktop shortcut. Keep the folder in the same place afterward.
+
+No ChatGPT login, Node.js installation or administrator installation is required to open the app.
+This is an unsigned early build. It has not been executed on a Windows machine here; Windows may show an unknown-publisher notice. Do not disable Windows security settings. Review the source kit or ask for help if Windows blocks it.
+
+WHAT WORKS IMMEDIATELY
+- Local profile and project brief.
+- Code and production-note drafts.
+- Text-file import and export.
+- Workspace backup and restore.
+- Windows desktop shortcut creation.
+- Character artwork and custom app icon.
+
+TURN ON AI REPLIES
+Echo does not include an AI model. It can connect to an installed local model through Ollama.
+1. Open Connections in Echo.
+2. Use Get Ollama for Windows if you do not already have it.
+3. Install a suitable local chat model in Ollama. Model downloads and memory needs vary; choose one your PC can handle.
+4. Keep Ollama running. Click Find installed models in Echo and select one.
+5. Return to Assistant and send your message.
+Only the local service at 127.0.0.1:11434 is used by this connector. Echo never asks for an API key in chat. No model was downloaded for you.
+
+ACTUAL LIMITS
+- The chat produces text/code suggestions; it does not execute code or change files by itself.
+- Roblox Studio and Unreal Engine 5 are NOT connected. The app's instructions target their coding and design workflows, but direct editor control still needs actual plugins.
+- No separate Windows/GPU computer or virtual machine has been provisioned.
+- The included source kit's Docker sandbox is a separate, unconnected agent configuration.
+- The local profile is not an online account, password protection or cloud synchronization.
+- Notes/chat are stored on this device in Echo's app data. Back up your workspace before replacing the app or clearing app data.
+- The HTML companion is an offline browser file, NOT an Android APK or installable phone PWA. Phone home-screen installation would need a separately hosted installable version or an Android package.
+
+REMOVE ECHO
+Close Echo, remove its desktop shortcut, and delete the extracted app folder. Export a backup first. Local app data may remain in your Windows user profile.
+
+BUILD CHECKS
+Code syntax, TypeScript, local UI state/navigation and request validation were checked. The Windows runtime download matched Electron's official SHA-256. The executable's custom icon resources were re-parsed after branding. Native Windows launch, live AI replies and game-editor connections have not been tested.

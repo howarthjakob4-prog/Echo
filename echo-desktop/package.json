@@ -1,0 +1,27 @@
+{
+  "name": "echo-desktop",
+  "productName": "Echo",
+  "version": "0.1.0",
+  "description": "Project Nova Studio creative development companion",
+  "main": "main.cjs",
+  "author": "Project Nova Studio",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "build": "node build.mjs",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "lucide-react": "1.31.0"
+  },
+  "devDependencies": {
+    "electron": "44.7.2",
+    "vite": "8.0.13",
+    "typescript": "5.9.3",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3"
+  }
+}
