@@ -10,6 +10,10 @@ Jakob set Echo's version to **3.5** across the whole product. Applied the same d
 
 **Builder (Claude Code):** keep every Echo component on version 3.5 from here on. New builds, packages, and releases use 3.5 until Jakob sets a new version. If any file in your working copy still shows an older version (0.1.0 / 0.0.0 / 1.0), update it to match — do not ship mixed versions.
 
+## Planned — Version 4.0, November 2026 (founder directive, October 15, 2026)
+
+Jakob: in November, Echo moves to **version 4.0**. Until then, everything stays on 3.5. When November comes, bump all components together — desktop 4.0.0, agent 4.0.0, Android versionName "4.0" (versionCode above 35) — and update this changelog. The phone line, restriction round two, and the feature additions in ECHO-PUBLIC-RELEASE.md are the headline work of the 4.0 line.
+
 ## Also new since the kits were uploaded (all on this branch)
 
 - `ECHO-UPDATE-1.md` — phone-to-computer control, the Blender plugin, the lookup feature, and the quality bar (advanced, production-quality code and visuals; blockouts are only a starting skeleton).
