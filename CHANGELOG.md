@@ -14,6 +14,8 @@ Jakob set Echo's version to **3.5** across the whole product. Applied the same d
 
 Jakob asked for a bug hunt on Echo, then had Oma make the update. Two real bugs found and fixed:
 1. Python starter (echo-by-oma.py): password/api-key requests were landing in the ASK tier; Echo's rules make them NEVER. Now NEVER is checked first, and unrecognized harmless text returns UNKNOWN instead of NEVER.
+Jakob's idea, added the same day (draft by Oma: EchoPairing.kt): standalone phone mode (Echo keeps working with the computer off; computer-bound actions queue on-device and run on reconnect) and QR code pairing (owner scans the code shown in Echo on the computer; single-use, short expiry, logged). Spec updated in ECHO-UPDATE-1.md.
+
 2. Android app (MainActivity.kt): Approve/Deny buttons mutated fields on the message object, which Compose never redrew — the buttons stayed on screen. Now the handlers replace the item in the list with copy(), so the state actually updates. (The packaged Android Studio project already carried this fix.)
 
 ## Planned — Version 4.0, November 2026 (founder directive, October 15, 2026)
