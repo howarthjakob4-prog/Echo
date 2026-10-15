@@ -67,6 +67,22 @@ Echo will use a browser to look things up (see the lookup feature), and Echo wil
 
 Prices set by Jakob on October 15, 2026: Plus $20/month, Studio $30/month, Echo Ultra $50/month, Free $0. Each paid tier has its own price (founder corrected an earlier draft that had Plus and Studio both at $20); Echo Ultra is the advanced tier. If a subscription lapses, the account drops to Free features; the user's data and logs are never deleted over a lapse.
 
+## Admin portal
+
+Echo gets an admin portal for the owner (Jakob). Founder's direction, October 15, 2026.
+
+- **Owner only.** The portal opens only for Jakob's admin account — separate from every user account and from his personal Echo account — with extra sign-in protection (authenticator-style second step). No user, on any tier, can reach it.
+- **What the portal shows and does:**
+  - User accounts: who signed up, their tier (Free / Plus / Studio / Echo Ultra), account status, and when they joined.
+  - Subscriptions: view and manage tiers — grant, change, or comp a tier for a user. Prices stay as set: Plus $20/month, Studio $30/month, Echo Ultra $50/month.
+  - Safety queue: every reported concern from the website and every violation from Echo's browser logs lands here for review.
+  - Enforcement: warn, suspend, or ban, matching the abuse ladder. Every action requires a reason and is written to the record.
+  - Appeals: a banned or suspended user can appeal once through the website form; the appeal lands in this portal for Jakob's decision.
+  - Feature switches: turn features on or off per tier when the tiers change.
+  - Announcements: post a notice that reaches all users.
+- **Privacy line:** the portal shows accounts, tiers, reports, and safety logs. It does not open a user's private files or private conversations — those stay the user's.
+- **Admin actions are logged too.** Every change made in the portal (tier changes, bans, appeals decided) goes into an admin log with the time and the reason. Nobody edits the log, not even the admin.
+
 ## Builder notes
 
 - Implement tiers, restrictions, and subscriptions as checks in the software (account entitlement flags + permission gates), not as prompts the model can talk its way around.
