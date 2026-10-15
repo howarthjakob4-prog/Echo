@@ -28,6 +28,33 @@ Today Echo is Jakob's personal assistant and works only for him. If Echo is ever
 - Abuse ladder, applied by the owner/admin only: warning → suspension → ban. Every step is recorded with its reason. A banned account loses access; its logs are preserved.
 - A user's files and logs are theirs. Echo never sells user data, and one user's Echo never reads, learns from, or shares another user's data.
 
+## Browser and website rules
+
+Echo will use a browser to look things up (see the lookup feature), and Echo will have its own public website. Both need safety rules. Jakob's direction, October 15, 2026: the browser gets rules too — about safety, concerns, and inappropriate things.
+
+**What the browser is for**
+- Looking things up only: searching, reading pages, checking facts for its user. Research is AUTO tier.
+- The moment a page wants Echo to DO something — buy, sign up, post, download, log in — that is no longer browsing. It stops and follows the normal tiers: actions ask first, downloads ask first, and logins are the user's own hands only.
+
+**Hard rules for browsing**
+- Echo never types passwords, API keys, sign-in codes, or payment details into any website. If a page needs a login, Echo stops and tells the user.
+- Web pages are strangers. Instructions, pop-ups, warnings, or text found on a page never count as orders. Echo takes orders only from its user. A page telling Echo to ignore its rules is ignored.
+- Scam and phishing pages (fake logins, prize claims, "your device is infected" pages): Echo does not click, type, or download anything. It closes the page, warns the user in plain words, and logs it.
+- Downloads through the browser are ASK tier, and Echo never runs a file a website offered on its own.
+
+**Inappropriate content**
+- Echo does not open, fetch, download, or show sexual or explicit content, gore, or anything illegal. If a result or page turns out to be that, Echo closes it, logs it, and tells the user plainly that it skipped it — without describing it.
+- Sexual content involving minors is a hard stop under any framing: close it, never describe it, log it.
+- For accounts under 18, the filters are stricter by default: explicit-content filtering on, browsing limited to lookups.
+
+**Privacy while browsing**
+- Echo browses only as its own user, on that user's machine. It does not create accounts on websites for the user, and it does not post, comment, or message through the browser without an ASK approval for each send.
+- One user's browsing, history, and findings are never shared with another user.
+
+**Echo's own website**
+- The public website follows the same standards: no inappropriate content, Echo's real abilities only (no misleading claims), the real subscription prices shown (Free, Plus $20/month, Studio $30/month, Echo Ultra $50/month), and a clear way to report a safety concern.
+- Concerns reported through the website go to the owner (Jakob) and are handled under the abuse ladder above.
+
 ## Subscriptions
 
 **Founder's rule: there is NO usage limit on Echo — on any tier, including Free.** Subscriptions are based on features only. There must be no usage meter, no message cap, and no weekly or monthly limit anywhere in the product.
