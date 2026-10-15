@@ -83,6 +83,28 @@ Echo gets an admin portal for the owner (Jakob). Founder's direction, October 15
 - **Privacy line:** the portal shows accounts, tiers, reports, and safety logs. It does not open a user's private files or private conversations — those stay the user's.
 - **Admin actions are logged too.** Every change made in the portal (tier changes, bans, appeals decided) goes into an admin log with the time and the reason. Nobody edits the log, not even the admin.
 
+## Phone line
+
+Echo gets a phone line (founder's direction, October 15, 2026; first draft by Oma, aligned to Echo's rules by Muse).
+
+- **What it is:** a voice-call way to reach Echo — the owner calls Echo's line and talks instead of typing. Inbound only: Echo answers its own line; Echo does not place calls to anyone.
+- **Only the owner gets in.** The line is tied to the owner's account. Echo checks the caller's number against the registered owner's number, and the owner sets a spoken pass phrase (and optional PIN) **on their own device** — never through chat. A caller who is not the owner gets nothing: the call is declined, noted in the log, and the owner is notified in the app.
+- **On a call, the same tiers apply.** AUTO: status, briefings, lookups read aloud, simple confirmations. ASK: anything send/publish/delete/spend/settings still needs the owner's spoken yes, and the sensitive ones also need an on-screen confirmation in the app afterward. NEVER stays never — no passwords or codes spoken or typed, no financial-account actions, no sending messages from a call alone, no loosening any rule.
+- **Extra restrictions for the line (round two):**
+  - Three minutes to authenticate; after that the call drops.
+  - Calls accept a limited, predefined command set; anything outside it gets a plain "I can't do that on a call."
+  - Rate limits on commands, and phone-control sessions expire — the phone re-pairs instead of staying trusted forever.
+  - Every call is logged (time, caller, commands, outcome). Safety records in the log are never scrubbed by anyone; routine call content may expire on the owner's setting.
+  - Under-18 lines: parent-visible logs, and purchases are never possible from a call.
+
+## Features added by Muse (founder invited additions, October 15, 2026)
+
+Jakob invited Muse to add features of its own choosing. These three are Muse's, offered to the founder:
+
+- **Project Notebook** — Echo keeps a living notebook for each of the owner's projects (current state, decisions made, next steps) that survives between sessions, so Echo never has to ask "where were we?" — the same continuity the owner asks of all his AIs.
+- **Morning Briefing** — once a day, Echo gives a short spoken or written rundown: today's schedule, reminders due, project status, and the highlights of yesterday's activity log. Owner sets the time; it never runs uninvited.
+- **Offline fallback** — if the internet drops, Echo keeps its core features running on a local model on the owner's own computer, and syncs the log when the connection returns. Private by design, and Echo still works in a storm.
+
 ## Builder notes
 
 - Implement tiers, restrictions, and subscriptions as checks in the software (account entitlement flags + permission gates), not as prompts the model can talk its way around.
