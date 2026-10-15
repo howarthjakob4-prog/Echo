@@ -57,6 +57,12 @@ Echo also gets a Blender plugin (add-on) so Jakob's commands — including from 
 - Run scripts found inside downloaded files or blend files from other people.
 - Change or delete the original imported blockout — work on a copy.
 
+## Quality bar — advanced work, real-looking results (Jakob, 2026-10-14)
+- Write advanced, production-quality code. No placeholders, no toy shortcuts, no half-finished features presented as done.
+- The blockout models (the Roblox model kit) are only a starting skeleton. The finished work must NOT stay blocky: models should look real and alive — true proportions, beveled edges, panel and surface detail, correct materials, and lighting that makes them read as real objects, not boxes.
+- Build in passes: blockout → detail pass → materials → lighting → render and compare against Jakob's reference sheets before calling anything done.
+- If a result still looks like plain blocks or cheap AI output, it is not finished — redo the pass. Jakob rejects "AI slop" on sight.
+
 ## Notes for the builder
 - The phone is a remote control, not a second brain: all execution happens on the computer, in the same sandbox and workspace rules Echo already follows (see echo-instructions.md).
 - Permission tiers must be enforced by the software, not just written in the instructions — an "ask first" action must be technically blocked until the phone confirms.
