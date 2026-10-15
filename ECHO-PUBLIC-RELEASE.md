@@ -35,10 +35,10 @@ Today Echo is Jakob's personal assistant and works only for him. If Echo is ever
 - **Free** — Echo on one computer: core assistant, lookups, self-check, activity log.
 - **Plus — $20/month** — adds phone control and multiple projects/workspaces.
 - **Studio — $20/month** — adds the Blender plugin, advanced coding tools, the Nova Frontier production pipeline, and use on more than one computer.
-- **Pro — $50/month** — the most advanced tier (founder's decision, October 15, 2026): everything in Studio, plus Echo's most advanced abilities — the advanced self-coding tools and future top-tier features.
+- **Echo Ultra — $50/month** — the most advanced tier (founder's decision, October 15, 2026): everything in Studio, plus Echo's most advanced abilities — the advanced self-coding tools and future top-tier features.
 - **Owner (Jakob)** — everything unlocked, no subscription, no limits, admin access.
 
-Prices set by Jakob on October 15, 2026: Plus $20/month, Studio $20/month, Pro $50/month, Free $0. Plus and Studio are the same price and differ by features only; Pro is the advanced tier. If a subscription lapses, the account drops to Free features; the user's data and logs are never deleted over a lapse.
+Prices set by Jakob on October 15, 2026: Plus $20/month, Studio $20/month, Echo Ultra $50/month, Free $0. Plus and Studio are the same price and differ by features only; Echo Ultra is the advanced tier. If a subscription lapses, the account drops to Free features; the user's data and logs are never deleted over a lapse.
 
 ## Builder notes
 
