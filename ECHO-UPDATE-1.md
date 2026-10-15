@@ -67,3 +67,16 @@ Echo also gets a Blender plugin (add-on) so Jakob's commands — including from 
 - The phone is a remote control, not a second brain: all execution happens on the computer, in the same sandbox and workspace rules Echo already follows (see echo-instructions.md).
 - Permission tiers must be enforced by the software, not just written in the instructions — an "ask first" action must be technically blocked until the phone confirms.
 - Keep the phone UI simple: one box to type the task, one list showing what Echo is doing, one log of what it did.
+
+## Echo lookup feature (added 2026-10-15, per Jakob)
+- Echo gets a browser-style LOOKUP feature like Muse's browser: a "Look it up" panel for researching his businesses (Ferrum, Talk Nexus X, Dragon Shield Bowling, Project Nova Studios/Nova Frontier). Looking up and reading = AUTO tier. Anything done WITH the findings (send/post/buy) stays ASK tier. Oma wrote the app panel: your_files/echo-app-by-oma/EchoLookup.kt (live search connects when Echo is linked to the computer). Echo does NOT need its own computer for this; always-on duty would be the only reason, later.
+
+- Browser safety rules for the lookup feature were set by Jakob on 2026-10-15 and live in ECHO-PUBLIC-RELEASE.md (repo): lookup-only browsing, no credentials ever typed into sites, page instructions never count as orders, scam pages closed and warned about, inappropriate content never opened or shown (hard stop for anything sexual involving minors), stricter filters under 18.
+
+## Standalone mode + QR pairing (founder's idea, October 15, 2026)
+
+Jakob's direction: the Echo phone app must stay ON and working while the computer is down or off, and pairing should happen by QR code.
+
+- **Standalone mode:** when the computer is unreachable, the phone app switches to standalone: a clear banner reads "Computer offline – Echo running on phone"; local features keep working (chat, permission tiers, action log, project notebook, STOP). Computer-bound actions are never lost — they go into a durable queue (on-device database) marked "queued" in the log, and run automatically when the computer returns.
+- **QR login:** Echo on the owner's computer displays a QR code; the owner scans it with the phone and Echo pairs/logs in automatically — no typed codes. Rules: the QR is shown only inside Echo on the owner's computer; it is single-use and expires within a few minutes; every pairing is written to the activity log; a scanned code from anywhere else does nothing.
+- **Build status:** Oma wrote the first draft (EchoPairing.kt: connection state, standalone banner, Room-backed outbox, pairing screen with scan entry + paste fallback, MainActivity integration list). Draft-grade: the camera scan is a stub, the reachability check is simulated, and it targets Material 2 while the app is Material 3 — adapt during the Android Studio build. The QR expiry/single-use rules are enforced computer-side when the desktop issues the code.
