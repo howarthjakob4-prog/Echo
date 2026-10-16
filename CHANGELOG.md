@@ -1,5 +1,21 @@
 # Echo — Changelog & builder notices
 
+## Version 3.6 — October 15, 2026 (founder directive)
+
+Jakob set Echo's version to **3.6**. This release formally versions the October 15 bug-fix work (found by Oma, applied and verified by Muse) that had shipped inside 3.5:
+
+- **Permission tiers fixed** (echo-by-oma.py): requests involving passwords, API keys, codes, secrets, or credentials are NEVER — and NEVER is now checked first, before ASK and AUTO. Unrecognized text returns UNKNOWN instead of falling through.
+- **Android Approve/Deny fixed** (MainActivity.kt): the buttons now replace the message in the list with copy(), so the screen actually updates when a request is approved or denied.
+
+Applied the same day:
+
+- `echo-desktop/package.json` — version 3.6.0
+- `agent-source/package.json` — version 3.6.0
+- Android project (`echo-android-project`) — versionName "3.6", versionCode 36
+
+**Builder (Claude Code):** keep every Echo component on version 3.6 from here on (this supersedes the 3.5 note below). The standalone-mode / QR-pairing draft (EchoPairing.kt) is still NOT in the buildable Android project — it gets wired in only after the clean 3.6 project builds in Android Studio. Version 4.0 stays planned for November 2026 (see below).
+
+
 ## Version 3.5 — October 15, 2026 (founder directive)
 
 Jakob set Echo's version to **3.5** across the whole product. Applied the same day:
@@ -20,7 +36,7 @@ Jakob's idea, added the same day (draft by Oma: EchoPairing.kt): standalone phon
 
 ## Planned — Version 4.0, November 2026 (founder directive, October 15, 2026)
 
-Jakob: in November, Echo moves to **version 4.0**. Until then, everything stays on 3.5. When November comes, bump all components together — desktop 4.0.0, agent 4.0.0, Android versionName "4.0" (versionCode above 35) — and update this changelog. The phone line, restriction round two, and the feature additions in ECHO-PUBLIC-RELEASE.md are the headline work of the 4.0 line.
+Jakob: in November, Echo moves to **version 4.0**. Until then, everything stays on 3.6. When November comes, bump all components together — desktop 4.0.0, agent 4.0.0, Android versionName "4.0" (versionCode above 35) — and update this changelog. The phone line, restriction round two, and the feature additions in ECHO-PUBLIC-RELEASE.md are the headline work of the 4.0 line.
 
 ## Also new since the kits were uploaded (all on this branch)
 
