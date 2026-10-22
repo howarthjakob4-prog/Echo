@@ -6,7 +6,9 @@ Echo runs as a small server on your own machine, answers through a pluggable
 an instant STOP, and a ticket system — Echo never rebuilds or reprograms
 itself; change requests become tickets for the maintainer to review.
 
-This is Echo's **first public release** — open source under the MIT License.
+This is Echo's **first public release** — open source under the
+MIT License + Commons Clause: free to use, fork, and change, **but
+the software cannot be sold** (see [License](#license)).
 Fork it, change it, make it what you feel it should be. Changes to the
 official Echo, though, land only through a pull request with maintainer
 approval (see [Contributing](#contributing)).
@@ -258,15 +260,22 @@ over it.
 ## Contributing
 
 Echo is open source: **fork it and change it how you want** — your fork is
-yours. But changes to the official Echo need **approval**: open a pull
+yours to use, study, and change. One hard rule travels with every copy
+and every modified version: **the software cannot be sold** (see
+[License](#license)). But changes to the official Echo need **approval**: open a pull
 request against `main`, and it merges only after a maintainer review and
 approval. `main` is protected for exactly this reason. Please keep
 changes focused, and say plainly what they do and why.
 
 ## License
 
-MIT — see [LICENSE](LICENSE). Copyright © 2026 Jakob Howarth / Ferrum.
+MIT + Commons Clause — see [LICENSE](LICENSE). Copyright © 2026
+Jakob Howarth / Ferrum. Echo is free to use, fork, and change — **but
+the software cannot be sold**: nobody who receives it, in original or
+modified form, may sell it, or sell a product or service whose value
+derives entirely or substantially from the functionality of the
+Software.
 
 Echo is a Ferrum product. The golden dragon shield and the Ferrum and
-Echo names remain Ferrum's; the MIT license covers the code in this
+Echo names remain Ferrum's; the license above covers the code in this
 repository.
