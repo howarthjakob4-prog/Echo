@@ -1,0 +1,12 @@
+{
+  "days": [
+    "mon",
+    "tue",
+    "wed",
+    "thu",
+    "fri"
+  ],
+  "end": "15:30",
+  "note": "The school's own hours, read in the server's local time. Schools edit this file to set their own window \u2014 these Mon-Fri 07:30-15:30 values are only the starting defaults. During this window, students may not enter the school portal; teachers and admins may enter at any time.",
+  "start": "07:30"
+}

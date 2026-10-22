@@ -1,0 +1,27 @@
+{
+  "home_use": {
+    "enabled": true,
+    "homework_check": true,
+    "session_limit_minutes": 60
+  },
+  "machine": "student laptop",
+  "name": "Ferrum Classbook",
+  "notes": "Schools can switch the setup how they want. The school software is a selectable profile on the standard Echo server (ECHO_PROFILE=school_student), not a separate fork. The school_student profile is the strict one: students cannot ask Echo to remember personal notes (NEVER tier), saving a page waits for a teacher's approval, and lookups stay AUTO. Home use: a student at home gets a timed Echo session (see home_use); the limit is set by parents and tech departments through the portal, not by students or teachers.",
+  "platform": "Linux-based",
+  "price": "about $349",
+  "profile": "school_student",
+  "program": {
+    "cost_to_school": "$1 one-time per school",
+    "launches": "with Ferrum",
+    "name": "Ferrum school program",
+    "region": "US only"
+  },
+  "role": "student",
+  "switchable_by_school": true,
+  "system_mode": "ferrum_linux",
+  "system_modes": [
+    "ferrum_linux",
+    "windows",
+    "chromebook_style"
+  ]
+}

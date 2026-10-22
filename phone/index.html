@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Echo — phone</title>
+<style>
+  /* Design tokens copied verbatim from the computer version
+     (ts-spaces/echo-brain-test/client/src/theme.css). Same design,
+     phone reflow only — no re-skin. */
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+  :root {
+    color-scheme: dark;
+    --bg: #060a08;
+    --surface: #0c120e;
+    --surface-alt: #101813;
+    --text: #e8f5ee;
+    --dim: #8fae9d;
+    --border: #1d2b21;
+    --accent: #3dffb0;
+    --accent-dim: #1d5c40;
+    --danger: #ff4d4d;
+    --radius: 12px;
+    --font-display: "Space Grotesk", system-ui, sans-serif;
+    --font-log: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-display);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Phone column: full width on a phone, centered column on anything wider. */
+  .phone {
+    display: flex; flex-direction: column;
+    height: 100dvh; max-width: 430px; margin: 0 auto;
+    background: var(--bg);
+  }
+
+  /* Top bar — the computer header, reflowed: avatar + name + tagline. */
+  header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 14px 10px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    padding-top: max(12px, env(safe-area-inset-top));
+  }
+  .avatar-ring {
+    flex-shrink: 0; border-radius: 9999px; padding: 2px;
+    background: var(--accent-dim);
+    box-shadow: 0 0 18px rgba(61,255,176,0.45);
+  }
+  .avatar-ring img {
+    display: block; width: 52px; height: 52px;
+    border-radius: 9999px; object-fit: cover;
+  }
+  .head-text { min-width: 0; flex: 1; }
+  .head-row { display: flex; align-items: center; gap: 8px; }
+  h1 { font-size: 21px; font-weight: 600; line-height: 1.15; }
+  .dot {
+    display: inline-block; width: 8px; height: 8px; border-radius: 9999px;
+    background: var(--accent); box-shadow: 0 0 8px var(--accent); flex-shrink: 0;
+  }
+  .dot.off { background: var(--danger); box-shadow: 0 0 8px var(--danger); }
+  .tagline {
+    margin-top: 2px; font-size: 13px; color: var(--dim); line-height: 1.3;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .brain-badge {
+    margin-top: 5px; display: flex; width: 100%; align-items: center; gap: 6px;
+    border: 1px solid var(--border); background: var(--surface-alt);
+    border-radius: 9999px; padding: 2px 9px;
+    font-family: var(--font-log); font-size: 11px; color: var(--accent);
+    max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  /* Doing line — the computer status strip, reflowed to a single row. */
+  .status-line {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 14px; font-size: 13px; color: var(--text);
+    border-bottom: 1px solid var(--border); background: var(--bg);
+  }
+  .status-line .label {
+    font-family: var(--font-log); font-size: 10px; font-weight: 600;
+    letter-spacing: 0.14em; color: var(--accent);
+  }
+  .status-line .dot { width: 7px; height: 7px; }
+  .status-line .dot.stop { background: var(--danger); box-shadow: 0 0 8px var(--danger); }
+
+  /* Conversation area */
+  .chat {
+    flex: 1; overflow-y: auto; padding: 14px 12px;
+    display: flex; flex-direction: column; gap: 14px;
+    background: var(--surface);
+  }
+  .empty {
+    border: 1px dashed var(--border); background: var(--surface-alt);
+    border-radius: 8px; padding: 14px; font-size: 14px; color: var(--dim);
+    line-height: 1.45;
+  }
+  .empty .lead { color: var(--text); }
+  .row-user { display: flex; justify-content: flex-end; }
+  .bubble-user {
+    max-width: 85%; background: var(--accent-dim); color: #fff;
+    border-radius: 16px; border-bottom-right-radius: 6px;
+    padding: 10px 14px; font-size: 15px; line-height: 1.5;
+    white-space: pre-wrap; overflow-wrap: break-word;
+  }
+  .row-echo { display: flex; justify-content: flex-start; }
+  .echo-wrap { max-width: 88%; }
+  .bubble-echo {
+    border: 1px solid var(--border); background: var(--surface-alt);
+    border-radius: 16px; border-bottom-left-radius: 6px;
+    padding: 10px 14px; font-size: 15px; line-height: 1.5;
+    white-space: pre-wrap; overflow-wrap: break-word;
+  }
+  .answered-by {
+    margin-top: 4px; padding-left: 4px;
+    font-family: var(--font-log); font-size: 11px; color: var(--dim);
+  }
+  .thinking { color: var(--dim); font-size: 14px; }
+  .stopped-banner {
+    border: 1px solid var(--danger); color: var(--danger);
+    background: rgba(255,77,77,0.08); border-radius: 8px;
+    padding: 12px; text-align: center; font-size: 14px; font-weight: 500;
+  }
+  .error-box {
+    margin: 0 12px; border: 1px solid var(--danger); color: var(--danger);
+    border-radius: 8px; padding: 8px 12px; font-size: 14px; background: var(--bg);
+  }
+
+  /* Composer — pinned at the bottom, same controls as the computer version. */
+  .composer {
+    border-top: 1px solid var(--border); background: var(--surface);
+    padding: 10px 12px; display: flex; align-items: flex-end; gap: 8px;
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+  }
+  .composer textarea {
+    flex: 1; min-width: 0; min-height: 48px; max-height: 110px; resize: none;
+    border: 1px solid var(--border); background: var(--surface-alt);
+    border-radius: 8px; padding: 12px; font: inherit; font-size: 16px;
+    color: var(--text); outline: none;
+  }
+  .composer textarea::placeholder { color: var(--dim); }
+  .composer textarea:focus { border-color: var(--accent); }
+  .btn {
+    border: none; border-radius: 8px; min-height: 48px; padding: 12px 15px;
+    font: inherit; font-size: 16px; font-weight: 600; cursor: pointer;
+    flex-shrink: 0;
+  }
+  .btn-send { background: var(--accent); color: #000; }
+  .btn-send:disabled { opacity: 0.4; }
+  .btn-stop { background: var(--danger); color: #fff; font-weight: 700; padding: 12px 13px; }
+  .btn-again { background: var(--accent); color: #000; width: 100%; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <header>
+    <div class="avatar-ring">
+      <img src="avatar.png" alt="Echo, the AI assistant designed by Jakob Howarth">
+    </div>
+    <div class="head-text">
+      <div class="head-row">
+        <h1>Echo</h1>
+        <span class="dot" id="connDot" aria-hidden="true"></span>
+      </div>
+      <p class="tagline">An AI assistant designed by Jakob Howarth</p>
+      <span class="brain-badge" id="brainBadge">brain: connecting…</span>
+    </div>
+  </header>
+
+  <div class="status-line" aria-label="Echo status">
+    <span class="label">DOING</span>
+    <span class="dot" id="doingDot" aria-hidden="true"></span>
+    <span id="doingText" role="status">Talking with you</span>
+  </div>
+
+  <div class="chat" id="chat" aria-label="Chat with Echo"></div>
+  <p class="error-box" id="errorBox" role="alert" hidden></p>
+
+  <div class="composer" id="composer">
+    <label for="draft" class="sr" style="position:absolute;left:-9999px">Message for Echo</label>
+    <textarea id="draft" rows="2" placeholder="Type a message for Echo…"></textarea>
+    <button class="btn btn-send" id="sendBtn" type="button" aria-label="Send message to Echo">Send</button>
+    <button class="btn btn-stop" id="stopBtn" type="button" aria-label="Stop the session">STOP</button>
+  </div>
+</div>
+
+<script>
+"use strict";
+/*
+ * Connection — the same contract Echo's own surfaces use, pointed at the
+ * real Echo server (127.0.0.1:8790):
+ *   GET  /status  -> identity, brain, state, model roster summary
+ *   POST /chat    -> {"messages":[{"role":"user","content":"..."}]}
+ *                    returns {"ok":true,"reply":"...","model":"echo_core"}
+ * The phone server (phone_server.py, port 8798) serves this page and
+ * pass-through proxies /status and /chat to 8790, so the browser stays
+ * same-origin — the same bridge pattern the Brain Test page's server
+ * uses to reach Echo's brain. No replies are ever generated client-side.
+ */
+const chatEl = document.getElementById("chat");
+const draftEl = document.getElementById("draft");
+const sendBtn = document.getElementById("sendBtn");
+const stopBtn = document.getElementById("stopBtn");
+const composerEl = document.getElementById("composer");
+const errorBox = document.getElementById("errorBox");
+const connDot = document.getElementById("connDot");
+const brainBadge = document.getElementById("brainBadge");
+const doingDot = document.getElementById("doingDot");
+const doingText = document.getElementById("doingText");
+
+let messages = [];      // {role, content} — the full conversation, sent each turn
+let sending = false;
+let stopped = false;
+let defaultModelLabel = "muse-spark-1.3";
+
+function scrollDown() {
+  requestAnimationFrame(() => { chatEl.scrollTop = chatEl.scrollHeight; });
+}
+function showEmpty() {
+  chatEl.innerHTML =
+    '<div class="empty"><p class="lead">Echo is listening.</p>' +
+    "<p>Say hello, ask who it is, or give it a task to talk through. Every reply comes " +
+    "from Muse Spark, running with Echo's own rules — including the one that always " +
+    "wins: STOP.</p></div>";
+}
+function addUserBubble(text) {
+  const row = document.createElement("div"); row.className = "row-user";
+  const b = document.createElement("div"); b.className = "bubble-user"; b.textContent = text;
+  row.appendChild(b); chatEl.appendChild(row); scrollDown();
+}
+function addEchoBubble(text, model) {
+  const row = document.createElement("div"); row.className = "row-echo";
+  const wrap = document.createElement("div"); wrap.className = "echo-wrap";
+  const b = document.createElement("div"); b.className = "bubble-echo"; b.textContent = text;
+  const by = document.createElement("p"); by.className = "answered-by";
+  by.textContent = "answered by " + (model || defaultModelLabel);
+  wrap.appendChild(b); wrap.appendChild(by); row.appendChild(wrap);
+  chatEl.appendChild(row); scrollDown();
+}
+function addThinking() {
+  const row = document.createElement("div"); row.className = "row-echo"; row.id = "thinkingRow";
+  const b = document.createElement("div"); b.className = "bubble-echo thinking"; b.textContent = "Echo is thinking…";
+  row.appendChild(b); chatEl.appendChild(row); scrollDown();
+}
+function removeThinking() {
+  const t = document.getElementById("thinkingRow");
+  if (t) t.remove();
+}
+function setError(msg) {
+  if (msg) { errorBox.textContent = msg; errorBox.hidden = false; }
+  else { errorBox.hidden = true; errorBox.textContent = ""; }
+}
+function setDoing(text, isStop) {
+  doingText.textContent = text;
+  doingDot.className = "dot" + (isStop ? " stop" : "");
+}
+
+async function loadStatus() {
+  try {
+    const res = await fetch("/status");
+    if (!res.ok) throw new Error("status " + res.status);
+    const s = await res.json();
+    connDot.classList.remove("off");
+    brainBadge.textContent = "brain: " + (s.brain || "unknown");
+    if (s.state && s.state !== "running") setDoing(s.state, s.state === "stopped");
+  } catch (e) {
+    connDot.classList.add("off");
+    brainBadge.textContent = "brain: not connected";
+    setError("Couldn't reach Echo's server. Nothing here is faked — try again when he's up.");
+  }
+}
+
+async function send(text) {
+  messages.push({ role: "user", content: text });
+  addUserBubble(text);
+  sending = true; sendBtn.disabled = true;
+  setDoing("Thinking — answering you", false);
+  addThinking();
+  try {
+    const res = await fetch("/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: messages }),
+    });
+    const data = await res.json().catch(() => null);
+    removeThinking();
+    if (!data || !data.ok) {
+      setError((data && data.error) || "Echo's brain didn't answer. Try again.");
+      messages.pop();
+      return;
+    }
+    setError(null);
+    messages.push({ role: "assistant", content: data.reply });
+    addEchoBubble(data.reply, data.model);
+  } catch (e) {
+    removeThinking();
+    setError("Couldn't reach Echo's server. Try again.");
+    messages.pop();
+  } finally {
+    sending = false; sendBtn.disabled = false;
+    setDoing("Talking with you", false);
+    scrollDown();
+  }
+}
+
+function doStop() {
+  if (stopped) return;
+  stopped = true;
+  const banner = document.createElement("div");
+  banner.className = "stopped-banner"; banner.setAttribute("role", "status");
+  banner.textContent = "STOPPED — Echo has stopped. This conversation is locked. Start again when you're ready.";
+  chatEl.appendChild(banner);
+  setDoing("Stopped", true);
+  composerEl.innerHTML = "";
+  const again = document.createElement("button");
+  again.className = "btn btn-again"; again.type = "button";
+  again.textContent = "Start again — fresh conversation";
+  again.addEventListener("click", () => location.reload());
+  composerEl.appendChild(again);
+  scrollDown();
+}
+
+function handleSend() {
+  const text = draftEl.value.trim();
+  if (!text || stopped || sending) return;
+  if (chatEl.querySelector(".empty")) chatEl.innerHTML = "";
+  draftEl.value = "";
+  setError(null);
+  if (text.toUpperCase() === "STOP") { addUserBubble(text); doStop(); return; }
+  send(text);
+}
+
+sendBtn.addEventListener("click", handleSend);
+stopBtn.addEventListener("click", () => { if (!stopped) doStop(); });
+draftEl.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleSend(); }
+});
+
+showEmpty();
+loadStatus();
+
+/* Deep link: ?ask=<question> sends that question through the normal send
+   path on load (used for demos/captures — still a real server round-trip). */
+const ask = new URLSearchParams(location.search).get("ask");
+if (ask) {
+  if (chatEl.querySelector(".empty")) chatEl.innerHTML = "";
+  send(ask);
+}
+</script>
+</body>
+</html>

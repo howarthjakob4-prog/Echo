@@ -1,0 +1,7 @@
+{
+  "home_limit_default_minutes": null,
+  "homework_first": true,
+  "note": "Rules this school sets for its Echo machines, editable by approved tech/admin portal accounts (POST /portal_school_rules). school_hours_file points at the file holding the school's hours window; a school_hours change through the portal writes that file. These rules bind Echo within Ferrum's license. Founder rules \u2014 the license gate, STOP, no self-rebuild, ticket review by Jakob, no software removal without Jakob Howarth's permission \u2014 are NOT keys in this file and cannot be changed by school configuration.",
+  "school_hours_file": "school_hours.json",
+  "school_name": ""
+}

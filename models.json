@@ -1,0 +1,208 @@
+{
+  "active_backend": "meta_api",
+  "backends": {
+    "local_ollama": {
+      "label": "Local stand-in brain \u2014 a small open model served by Ollama on this machine",
+      "module": "brain_local.py",
+      "notes": "A working on-machine stand-in, selectable today with ECHO_BRAIN=local. Nothing leaves the machine when it runs. It is a stand-in, not Jakob's finished own brain.",
+      "purpose": "stand_in",
+      "status": "available",
+      "temporary": false
+    },
+    "meta_api": {
+      "label": "Muse Spark 1.3 via the Meta Model API",
+      "module": "../echo-brain-prep/echo_brain.py",
+      "notes": "Active only because the Meta Global AI Developer Hackathon challenge requires a Meta model \u2014 that is Jakob's prize eligibility. Temporary by design: when the challenge is over and Jakob directs it, the active backend flips to Echo's own brain and this one is retired. It is not Echo's permanent engine.",
+      "purpose": "hackathon_challenge",
+      "status": "active",
+      "temporary": true
+    },
+    "own_brain": {
+      "label": "Echo's own brain \u2014 Jakob's, running on Linux",
+      "module": null,
+      "notes": "The slot reserved for the brain Jakob is building, so Echo can communicate without Meta's models or servers. Present in config now, not yet active. When the brain exists, its module path goes here and active_backend flips to own_brain.",
+      "purpose": "permanent_engine",
+      "status": "slot_empty",
+      "temporary": false
+    }
+  },
+  "default_model": "echo_core",
+  "models": [
+    {
+      "aliases": [
+        "echo core"
+      ],
+      "backend": "default",
+      "id": "echo_core",
+      "min_tier": "free",
+      "name": "Echo Core",
+      "notes": "Live now, running on whichever backend is active.",
+      "release_date": null,
+      "role": "The default model \u2014 everyday talk and understanding; the model every chat starts with.",
+      "status": "live",
+      "version": "Range 1"
+    },
+    {
+      "aliases": [
+        "echo studios",
+        "studios"
+      ],
+      "backend": "default",
+      "id": "echo_studios",
+      "min_tier": "max",
+      "name": "Echo Studios",
+      "notes": "The only model that carries the 5.5 number.",
+      "release_date": "2026-11-20",
+      "role": "Studio and game production \u2014 the top creative model.",
+      "status": "coming_soon",
+      "version": "5.5"
+    },
+    {
+      "aliases": [
+        "gameforge",
+        "game forge"
+      ],
+      "backend": "default",
+      "id": "echo_gameforge",
+      "min_tier": "pro",
+      "name": "Echo GameForge",
+      "notes": null,
+      "release_date": "2026-11-20",
+      "role": "Game custom mode \u2014 building and tuning games.",
+      "status": "coming_soon",
+      "version": "3.1"
+    },
+    {
+      "aliases": [
+        "codewright"
+      ],
+      "backend": "default",
+      "id": "echo_codewright",
+      "min_tier": "pro",
+      "name": "Echo Codewright",
+      "notes": null,
+      "release_date": "2026-11-20",
+      "role": "Coding \u2014 writing, building, and debugging code.",
+      "status": "coming_soon",
+      "version": "2.7"
+    },
+    {
+      "aliases": [
+        "planner"
+      ],
+      "backend": "default",
+      "id": "echo_planner",
+      "min_tier": "pro",
+      "name": "Echo Planner",
+      "notes": null,
+      "release_date": "2026-11-20",
+      "role": "Multi-step projects \u2014 plans, steps, and follow-through.",
+      "status": "coming_soon",
+      "version": "2.2"
+    },
+    {
+      "aliases": [
+        "research"
+      ],
+      "backend": "default",
+      "id": "echo_research",
+      "min_tier": "pro",
+      "name": "Echo Research",
+      "notes": null,
+      "release_date": "2026-11-20",
+      "role": "Lookup and source-checking. Browsing stays read-only under Echo's research rules.",
+      "status": "coming_soon",
+      "version": "1.6"
+    },
+    {
+      "aliases": [
+        "guardian"
+      ],
+      "backend": "server_layer",
+      "id": "echo_guardian",
+      "min_tier": "free",
+      "name": "Echo Guardian",
+      "notes": "A layer, not a chat model: it guards every conversation rather than holding one.",
+      "now_note": "Its safety rules are already on guard in this server tonight \u2014 the refusals, the block list, and the warning ladder are Guardian's work.",
+      "release_date": "2026-11-20",
+      "role": "The safety layer above every model \u2014 its word outranks the others.",
+      "status": "coming_soon",
+      "version": "1.4"
+    },
+    {
+      "aliases": [
+        "archivist"
+      ],
+      "backend": "default",
+      "id": "echo_archivist",
+      "min_tier": "max",
+      "name": "Echo Archivist",
+      "notes": null,
+      "release_date": "2026-11-20",
+      "role": "Log and memory keeper \u2014 activity summaries and records.",
+      "status": "coming_soon",
+      "version": "1.3"
+    },
+    {
+      "aliases": [
+        "vision"
+      ],
+      "backend": "default",
+      "id": "echo_vision",
+      "min_tier": "max",
+      "name": "Echo Vision",
+      "notes": null,
+      "release_date": "2026-11-20",
+      "role": "Sees screens and images, and describes them.",
+      "status": "coming_soon",
+      "version": "1.1"
+    },
+    {
+      "aliases": [
+        "phonelink",
+        "phone link"
+      ],
+      "backend": "default",
+      "id": "echo_phonelink",
+      "min_tier": "max",
+      "name": "Echo PhoneLink",
+      "notes": null,
+      "release_date": "2026-11-20",
+      "role": "Phone and computer control.",
+      "status": "coming_soon",
+      "version": "0.9"
+    },
+    {
+      "aliases": [
+        "voiceline",
+        "voice line"
+      ],
+      "backend": "default",
+      "id": "echo_voiceline",
+      "min_tier": "max",
+      "name": "Echo VoiceLine",
+      "notes": "The models lineup lands with Echo 4.1 (November 20, 2026); the phone-line features themselves begin in Echo 4.0 (November 2, 2026).",
+      "release_date": "2026-11-20",
+      "role": "Phone-line spoken mode \u2014 Echo's voice on a call.",
+      "status": "coming_soon",
+      "version": "0.7"
+    },
+    {
+      "aliases": [
+        "ultra echo",
+        "ultra"
+      ],
+      "backend": "default",
+      "id": "ultra_echo",
+      "min_tier": null,
+      "name": "ULTRA ECHO",
+      "notes": "No version number and no announced date \u2014 both are Jakob's to give. Which tier it belongs to has not been announced.",
+      "release_date": null,
+      "role": "The top model \u2014 Jakob's flagship, still under wraps.",
+      "status": "coming_soon",
+      "version": "0.39"
+    }
+  ],
+  "notes": "Jakob's Echo model roster \u2014 the canon lineup he approved on October 16, 2026. This file is the server's source of truth for which models exist, which tier each belongs to, and whether each is live or still coming. Adding a model or a feature later means editing this file, not the server code. The backends section names the engines that can answer for the models: which one is active is a config choice (active_backend), never something welded into the code.",
+  "registry_version": "1.0"
+}
