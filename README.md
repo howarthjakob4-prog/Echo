@@ -267,6 +267,8 @@ request against `main`, and it merges only after a maintainer review and
 approval. `main` is protected for exactly this reason. Please keep
 changes focused, and say plainly what they do and why.
 
+**Feature requests go in [Discussions](https://github.com/howarthjakob4-prog/Echo/discussions)** — post them in the **Ideas** category. Questions are welcome there too.
+
 ## License
 
 MIT + Commons Clause — see [LICENSE](LICENSE). Copyright © 2026
