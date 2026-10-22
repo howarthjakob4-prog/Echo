@@ -42,8 +42,10 @@ approval (see [Contributing](#contributing)).
 - **Platform plugins** — `plugins/` carries one plugin per platform
   (YouTube, Facebook, Instagram, X, TikTok), each the sanctioned route for
   that platform.
-- **Phone version** — a phone-sized Echo screen in `phone/`, so you can
-  use Echo from a phone browser (see [Phone setup](#phone-setup)).
+- **Phone app** — Echo is an actual Android app (source in `android/`),
+  not just a web page — build it and it lives on your phone like any
+  app. There's also a built-in phone-sized web screen in `phone/`
+  (see [Phone setup](#phone-setup)).
 
 ## Requirements
 
@@ -191,7 +193,30 @@ plugged in as a brain — that is how Echo's own brain will slot in later.
 
 ### Phone setup
 
-Echo's phone version is the same Echo, on a phone-sized screen:
+Echo's phone version is an **actual Android app** — not a web page.
+Its source lives in the `android/` folder of this repo
+(app version 3.6, package `com.example.echoapp`).
+
+**Build the app and put it on your phone:**
+
+1. Install **Android Studio** on your computer (Linux or Windows).
+2. Open this repo's `android/` folder in Android Studio and let the
+   Gradle sync finish (the first sync downloads the libraries — it
+   needs internet).
+3. Menu: **Build → Build App Bundle(s) / APK(s) → Build APK(s)**.
+   When it finishes, click **locate** — the file is
+   `app/build/outputs/apk/debug/app-debug.apk`.
+4. Send `app-debug.apk` to your phone (email it to yourself, or USB).
+5. On the phone, tap the APK and tap **Install**. If Android asks,
+   allow installs from your files app or browser — that's just Android
+   checking you meant it. Echo then gets its own icon, like any app.
+
+A ready-made APK download will be attached to this release as soon as
+one has been built with the Android toolchain — until then, the build
+above is how you get the app.
+
+**The built-in web screen (no build needed):** the Echo server also
+ships a phone-sized screen in `phone/`:
 
 1. Start the main Echo server first (the steps above) and leave it
    running — the phone screen talks to it.
