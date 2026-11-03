@@ -1,5 +1,16 @@
 # Echo — Changelog & builder notices
 
+## Echo Linux server 1.3.3 — October 26, 2026 (Jakob's hackathon pick: the Watchman)
+
+The echo-linux server gains **Watchman mode** (`watchman.py`, wired into `server.py`; software 1.3.3 — separate from the brain, still 3.75):
+
+- Echo watches the Ferrum house-status feed himself: a background thread polls it every 20 seconds and keeps the last-seen per-service state.
+- When a service flips down or back up, Echo files a report to `watchman_reports.jsonl` and queues a proactive one-line report in his own factual style, delivered once — prepended to his next chat reply, never repeated.
+- House questions in chat ("how's the house", "what's down") are answered from the watchman's own data, by assembly — no LLM touches the numbers, so they are exact.
+- New read-only endpoint `GET /watchman`: watching state, source, last check, current per-service state, and recent reports. Reading it changes nothing.
+- STOP wins, as everywhere in Echo: while stopped, the watcher does not poll and files no reports.
+- Published to this repo November 3, 2026, at Jakob's direction, ahead of the hackathon submission (Meta Global AI Developer Hackathon — demo due November 4, 2026).
+
 ## Echo Linux server 1.3.2 — October 22, 2026 (Jakob's order: "Normal mode is required to stay on in the beta version")
 
 The echo-linux server (`~/workspace/echo-linux/server.py`, the software version line — separate from the brain, still 3.75) gains the **beta mode lock**:

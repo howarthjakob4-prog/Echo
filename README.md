@@ -13,7 +13,7 @@ Fork it, change it, make it what you feel it should be. Changes to the
 official Echo, though, land only through a pull request with maintainer
 approval (see [Contributing](#contributing)).
 
-- **Software version:** 1.3.2 (this release)
+- **Software version:** 1.3.3 (this release)
 - **Brain version:** 3.75
 - **Status:** public beta. On the beta, **normal mode is required and locked
   on** (see [Modes](#modes)).
@@ -35,6 +35,9 @@ approval (see [Contributing](#contributing)).
   runtime (see [Modes](#modes)).
 - **Beta mode lock (1.3.2)** — on the beta, normal mode stays on; a flip to
   school mode is refused.
+- **The Watchman (1.3.3)** — Echo watches the Ferrum house status
+  feed himself and reports service changes proactively, in his own
+  words, the moment he sees them (see `watchman.py`).
 - **Careful web research** — lookups run through a real Google Chrome,
   appropriate sites only, SafeSearch on, and a block list enforced at fetch
   time ("Sorry, this website is blocked.").
