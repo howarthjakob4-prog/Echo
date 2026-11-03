@@ -312,7 +312,7 @@ SAVED_DIR = os.path.join(HERE, "saved")
 NOTES_FILE = os.path.join(HERE, "echo_notes.txt")
 TICKETS_FILE = os.path.join(HERE, "tickets.jsonl")
 LICENSE_FILE = os.path.join(HERE, "license_state.json")
-VERSION = "echo-linux 1.3.2"
+VERSION = "echo-linux 1.3.3"
 # Echo's software version, set by Jakob 2026-10-19. Separate from the
 # brain version: the brain is a component, the software is the product.
 # 1.2.5 (Jakob's designation, 2026-10-19): research rules with the
@@ -340,7 +340,10 @@ VERSION = "echo-linux 1.3.2"
 # /mode and chat asks refuse a flip to school, and /status and GET
 # /mode report the lock. The owner lifts or re-applies it with POST
 # /mode {"beta_lock": false|true}. Brain stays 3.75.
-SOFTWARE_VERSION = "1.3.2"
+# 1.3.3 (2026-10-26, Jakob's centerpiece pick): the Watchman — Echo
+# monitors the Ferrum house status feed himself and reports changes
+# proactively (watchman.py + GET /watchman). Brain stays 3.75.
+SOFTWARE_VERSION = "1.3.3"
 BRAIN_VERSION = "3.75"  # Echo's brain version, set by Jakob 2026-10-18
 POLICIES_FILE = os.path.join(HERE, "policies.json")
 MODELS_FILE = os.path.join(HERE, "models.json")
@@ -348,6 +351,7 @@ HOST, PORT = "127.0.0.1", 8790
 
 sys.path.insert(0, HERE)
 import browser_tool  # noqa: E402  (Phase 1 basic lookup; see its docstring)
+import watchman  # noqa: E402  (Watchman mode, 2026-10-26: see watchman.py)
 
 # ---- Echo's state -------------------------------------------------------
 _state = {"stopped": False}
@@ -1734,6 +1738,13 @@ class EchoHandler(BaseHTTPRequestHandler):
         if path == "/status":
             log_event("status", state="stopped" if is_stopped() else "running")
             self._send_json(200, status_payload())
+        elif path == "/watchman":
+            # Watchman mode (2026-10-26): Echo's own house watch —
+            # read-only, like /status; reading it changes nothing.
+            body = watchman.status_payload(is_stopped())
+            log_event("watchman_status", watching=body["watching"],
+                      source=body["source"])
+            self._send_json(200, body)
         elif path == "/mode":
             # Switchable modes (1.3.1): which mode Echo is in right
             # now. Reading it changes nothing, like /status.
@@ -2133,6 +2144,30 @@ class EchoHandler(BaseHTTPRequestHandler):
                 log_event("chat_reply", ok=True)
                 self._send_json(200, result)
                 return
+            # Watchman mode (2026-10-26): a house-status ask is
+            # answered from the watchman's own data, by assembly —
+            # no brain call, so the numbers are exact. Queued house
+            # reports ride along first and are delivered once. When
+            # the watcher has no data yet, the ask falls through to
+            # the normal flow below.
+            house_ask = False
+            if not filed_id:
+                for msg in reversed(messages):
+                    if isinstance(msg, dict) and msg.get("role") == "user":
+                        content = msg.get("content")
+                        if isinstance(content, str):
+                            house_ask = watchman.is_house_question(content)
+                        break
+            if house_ask:
+                house_line = watchman.house_status_reply()
+                if house_line is not None:
+                    lines = watchman.take_pending_reports()
+                    lines.append(house_line)
+                    result = {"ok": True, "reply": "\n".join(lines),
+                              "watchman": True}
+                    log_event("chat_reply", ok=True, watchman=True)
+                    self._send_json(200, result)
+                    return
             # Baked-in agreements: a direct ask for one of the Ferrum
             # Software Policies is answered with the document itself —
             # the texts ship in the software (GET /policies), so no
@@ -2192,6 +2227,15 @@ class EchoHandler(BaseHTTPRequestHandler):
                     "student": home["student"],
                     "minutes_left": home["minutes_left"],
                 }
+            # Watchman mode (2026-10-26): queued house reports are
+            # delivered once, as the first line(s) of Echo's next
+            # reply, and never repeated.
+            if result.get("ok") and result.get("reply"):
+                pending_reports = watchman.take_pending_reports()
+                if pending_reports:
+                    result["reply"] = "\n".join(
+                        pending_reports + [result["reply"]])
+                    result["watchman_reports"] = len(pending_reports)
             log_event("chat_reply", ok=result.get("ok", False))
             self._send_json(200 if result.get("ok") else 502, result)
 
@@ -2949,5 +2993,8 @@ class EchoHandler(BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     log_event("server_start", version=VERSION, host=HOST, port=PORT)
+    # Watchman mode (2026-10-26): Echo watches the house himself.
+    # The watcher shares Echo's stopped state — STOP pauses it too.
+    watchman.start(is_stopped, log_event)
     print(f"{VERSION} listening on http://{HOST}:{PORT}", flush=True)
     ThreadingHTTPServer((HOST, PORT), EchoHandler).serve_forever()
